@@ -1,17 +1,7 @@
 import type { Metadata } from "next";
-import { Noto_Serif_SC } from "next/font/google";
-import { DocumentLang } from "@/components/common/DocumentLang";
+import { QuoteBanner } from "@/components/common/QuoteBanner";
 import { InnerWorldContent } from "@/components/inner-world/InnerWorldContent";
 import { readingStages } from "@/lib/reading";
-
-const serif = Noto_Serif_SC({
-  weight: ["400", "700"],
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-serif",
-  preload: false,
-  fallback: ["Songti SC", "STSong", "PMingLiU", "serif"],
-});
 
 export const metadata: Metadata = {
   title: "Inner World",
@@ -23,9 +13,9 @@ export const metadata: Metadata = {
 
 export default function InnerWorldPage() {
   return (
-    <div className={`${serif.variable} inner-world`}>
-      <DocumentLang lang="zh-CN" />
+    <div className="inner-world">
       <InnerWorldContent stages={readingStages} />
+      <QuoteBanner text="Master your inner world, and you master your life." />
     </div>
   );
 }

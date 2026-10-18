@@ -3,16 +3,19 @@ import path from "path";
 import withBundleAnalyzer from "@next/bundle-analyzer";
 
 const nextConfig: NextConfig = {
-  turbopack: {
-    root: path.resolve(__dirname),
-  },
+  output: "export",
+  trailingSlash: true,
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",
         hostname: "ghchart.rshah.org",
       },
     ],
+  },
+  turbopack: {
+    root: path.resolve(__dirname),
   },
 };
 

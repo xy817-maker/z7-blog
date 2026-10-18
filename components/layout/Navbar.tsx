@@ -15,26 +15,30 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-[var(--background)]/80 border-b border-[var(--card-border)]">
-      <nav className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
+    <header className="fixed top-4 left-1/2 z-50 w-[92%] max-w-6xl -translate-x-1/2 rounded-full nav-pill shadow-sm">
+      <nav className="flex items-center justify-between px-4 sm:px-6 py-2.5">
         <Link
           href="/"
-          className="flex items-center gap-2 text-lg font-bold text-[var(--accent)] hover:opacity-80 transition-opacity"
+          className="flex items-center gap-2.5 transition-transform duration-150 active:scale-95"
         >
-          <Image
-            src={siteConfig.avatar}
-            alt={siteConfig.nameEn}
-            width={32}
-            height={32}
-            className="h-8 w-8 rounded-full object-cover ring-1 ring-[var(--accent)]/30"
-            priority
-            unoptimized
-          />
-          {siteConfig.nameEn}
+          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[var(--card-border)] bg-[var(--accent-light)]/70">
+            <Image
+              src={siteConfig.avatar}
+              alt={siteConfig.nameEn}
+              width={36}
+              height={36}
+              className="h-full w-full rounded-full object-cover"
+              priority
+              unoptimized
+            />
+          </span>
+          <span className="font-display text-lg font-bold tracking-tight text-[var(--accent)]">
+            {siteConfig.nameEn}
+          </span>
         </Link>
 
         {/* Desktop nav */}
-        <div className="hidden md:flex items-center gap-1">
+        <div className="hidden items-center gap-1 md:flex">
           {siteConfig.nav.map((item) => {
             const isActive =
               item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
@@ -42,10 +46,10 @@ export function Navbar() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`px-3 py-2 rounded-lg text-sm transition-colors ${
+                className={`rounded-full px-4 py-1.5 text-sm transition-colors ${
                   isActive
-                    ? "bg-[var(--accent-light)] text-[var(--accent)] font-medium"
-                    : "text-[var(--muted)] hover:text-[var(--foreground)] hover:bg-[var(--card)]"
+                    ? "bg-[var(--accent-light)] font-semibold text-[var(--accent)]"
+                    : "text-[var(--muted)] hover:bg-[var(--accent-light)]/40 hover:text-[var(--foreground)]"
                 }`}
               >
                 {item.label}
@@ -56,14 +60,19 @@ export function Navbar() {
         </div>
 
         {/* Mobile toggle */}
-        <div className="flex md:hidden items-center gap-2">
+        <div className="flex items-center gap-2 md:hidden">
           <ThemeToggle />
           <button
-            onClick={() => { trackEvent("mobile_menu_toggle", { state: mobileOpen ? "closed" : "open" }); setMobileOpen(!mobileOpen); }}
-            className="p-2 rounded-lg hover:bg-[var(--card)] transition-colors"
+            onClick={() => {
+              trackEvent("mobile_menu_toggle", { state: mobileOpen ? "closed" : "open" });
+              setMobileOpen(!mobileOpen);
+            }}
+            className="rounded-full p-2 text-[var(--muted)] transition-colors hover:bg-[var(--accent-light)]/40 hover:text-[var(--foreground)]"
             aria-label="Toggle menu"
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-menu"
           >
-            {mobileOpen ? <FiX size={20} /> : <FiMenu size={20} />}
+            {mobileOpen ? <FiX size={18} /> : <FiMenu size={18} />}
           </button>
         </div>
       </nav>
@@ -72,12 +81,13 @@ export function Navbar() {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
+            id="mobile-menu"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden border-b border-[var(--card-border)] bg-[var(--background)]"
+            className="overflow-hidden md:hidden"
           >
-            <div className="px-4 py-2 space-y-1">
+            <div className="space-y-1 px-4 pb-3 pt-1">
               {siteConfig.nav.map((item) => {
                 const isActive =
                   item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
@@ -86,10 +96,10 @@ export function Navbar() {
                     key={item.href}
                     href={item.href}
                     onClick={() => setMobileOpen(false)}
-                    className={`block px-3 py-2 rounded-lg text-sm transition-colors ${
+                    className={`block rounded-full px-4 py-2 text-sm transition-colors ${
                       isActive
-                        ? "bg-[var(--accent-light)] text-[var(--accent)] font-medium"
-                        : "text-[var(--muted)] hover:text-[var(--foreground)]"
+                        ? "bg-[var(--accent-light)] font-semibold text-[var(--accent)]"
+                        : "text-[var(--muted)] hover:bg-[var(--accent-light)]/40 hover:text-[var(--foreground)]"
                     }`}
                   >
                     {item.label}

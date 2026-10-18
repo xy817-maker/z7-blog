@@ -12,7 +12,6 @@ import {
   FiTool,
 } from "react-icons/fi";
 import { siteConfig } from "@/lib/site-config";
-import { MottoBlock } from "@/components/common/MottoBlock";
 
 interface Skill {
   name: string;
@@ -50,7 +49,7 @@ const fadeUp = {
 
 export function AboutContent() {
   return (
-    <div className="max-w-3xl mx-auto px-4 py-16">
+    <div className="max-w-3xl mx-auto px-4 pt-16 pb-12">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -10 }}
@@ -191,8 +190,6 @@ export function AboutContent() {
           ))}
         </motion.div>
       </Section>
-
-      <MottoBlock text="Build your own story." />
     </div>
   );
 }

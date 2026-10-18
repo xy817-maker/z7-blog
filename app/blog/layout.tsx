@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { DocumentLang } from "@/components/common/DocumentLang";
 
 export const metadata: Metadata = {
   openGraph: {
@@ -10,7 +9,6 @@ export const metadata: Metadata = {
 export default function BlogLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <DocumentLang lang="zh-CN" />
       {children}
     </>
   );

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { siteConfig } from "@/lib/site-config";
+import { QuoteBanner } from "@/components/common/QuoteBanner";
 import { AboutContent } from "./AboutContent";
 
 export const metadata: Metadata = {
@@ -8,5 +9,10 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
-  return <AboutContent />;
+  return (
+    <>
+      <AboutContent />
+      <QuoteBanner text="Work in silence, let success make the noise." />
+    </>
+  );
 }

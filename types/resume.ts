@@ -13,6 +13,8 @@ export interface ResumeProject {
   name: string;
   role?: string;
   tech: string;
+  github?: string;
+  period?: string;
   summary?: string;
   points: string[];
 }
@@ -22,6 +24,7 @@ export interface ResumeVersion {
   label: string;
   date: string;
   hidden?: boolean; // 用于控制是否展示该版本
+  intent?: { role: string; note: string };
   header: { name: string; email: string; github: string; blog: string };
   sections: {
     summary: string;

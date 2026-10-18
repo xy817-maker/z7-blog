@@ -1,0 +1,34 @@
+---
+title: Go 并发里让我栽过的三个坑
+date: '2026-08-09'
+description: goroutine 泄漏、循环变量和 channel 死锁的真实踩坑记录。
+tags: ['服务端']
+---
+
+# 坑一：以为 go 出去就完事了
+
+给每个请求起一个 goroutine 做异步处理，压测一跑内存持续上涨。原因是处理函数里有一个阻塞读取，客户端断开后永远不会返回，goroutine 越积越多。
+
+```go
+// 修复：给阻塞操作加超时和退出通道
+select {
+case result := <-ch:
+    handle(result)
+case <-time.After(5 * time.Second):
+    return
+case <-done:
+    return
+}
+```
+
+# 坑二：在循环里捕获循环变量
+
+老版本 Go 里，`for` 里启发的 goroutine 捕获的是同一个变量地址，十个 goroutine 打印出同一个值，查了半天以为是指针问题。
+
+# 坑三：无缓冲 channel 当队列用
+
+把无缓冲 channel 当作任务队列，生产者发几条就卡住——没有消费者在等的时候发送方会一直阻塞，改成带缓冲或改用专门的任务队列才解决。
+
+# 总结
+
+并发 bug 的共同点是：单测一片绿，上线才暴露。后来给每个异步流程都加了超时和退出路径，先保证"能收尾"，再谈性能。

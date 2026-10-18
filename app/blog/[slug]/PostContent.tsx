@@ -6,8 +6,8 @@ import Link from "next/link";
 import type { PostMeta } from "@/lib/mdx";
 import { formatDate } from "@/lib/utils";
 import { GiscusComments } from "@/components/blog/GiscusComments";
+import { QuoteBanner } from "@/components/common/QuoteBanner";
 import { ArticleToc } from "@/components/blog/ArticleToc";
-import { MottoBlock } from "@/components/common/MottoBlock";
 import type { ReactNode } from "react";
 
 interface PostContentProps {
@@ -64,7 +64,7 @@ export function PostContent({ meta, children }: PostContentProps) {
         </div>
       </motion.article>
 
-      <MottoBlock text="The only true wisdom is in knowing you know nothing." />
+      <QuoteBanner text="Chase progress, not perfection." />
 
       <GiscusComments />
 

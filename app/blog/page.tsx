@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { getAllPosts, getAllTags } from "@/lib/mdx";
 import { BlogList } from "./BlogList";
-import { MottoBlock } from "@/components/common/MottoBlock";
+import { QuoteBanner } from "@/components/common/QuoteBanner";
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -13,10 +13,11 @@ export default function BlogPage() {
   const tags = getAllTags();
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-16">
-      <h1 className="text-3xl font-bold mb-8">Posts</h1>
+    <div className="mx-auto max-w-4xl px-5 pt-8 sm:px-8 sm:pt-10">
       <BlogList posts={posts} tags={tags} />
-      <MottoBlock text="If you can't explain it simply, you don't understand it well enough." />
+      <div className="mt-12">
+        <QuoteBanner text="Chase progress, not perfection." />
+      </div>
     </div>
   );
 }

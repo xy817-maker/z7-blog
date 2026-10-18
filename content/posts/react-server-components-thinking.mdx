@@ -1,0 +1,42 @@
+---
+title: 重新理解服务端组件的边界
+date: '2026-02-14'
+description: 把博客首页从客户端渲染迁到服务端组件的一次完整踩坑记录。
+tags: ['大前端']
+---
+
+# 为什么要搬去服务端
+
+首页的数据全部来自文件系统，却跑在客户端组件里，每次导航都要重新拉取一遍，还把用不到的 JS 都塞进了首屏包。
+
+# 迁移过程
+
+## 识别纯展示组件
+
+不包含 state、effect 和浏览器 API 的组件，直接去掉 `"use client"`，让 Next.js 在服务端渲染。
+
+## 圈定交互边界
+
+主题切换、移动端菜单这类必须访问 `document` 的部分保留为客户端组件，用最小的客户端子树把它们包起来，而不是让整个页面客户端化。
+
+```tsx
+// 迁移前：整个页面都是客户端组件
+"use client";
+export default function Page() {
+  const [open, setOpen] = useState(false);
+  return <Hero open={open} />;
+}
+
+// 迁移后：只有交互开关是客户端组件
+export default function Page() {
+  return <HeroSection />;
+}
+```
+
+# 结果
+
+首屏 JS 体积明显下降，文章列表的渲染时机从 hydration 之后提前到了服务端流式输出。
+
+## 遗留问题
+
+读取浏览器状态的初始化仍然需要 mounted 守卫，这是客户端组件的固有成本，绕不开，只能接受。

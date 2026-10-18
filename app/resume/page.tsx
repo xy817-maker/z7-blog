@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { siteConfig } from "@/lib/site-config";
-import { DocumentLang } from "@/components/common/DocumentLang";
+import { QuoteBanner } from "@/components/common/QuoteBanner";
 import { ResumeContent } from "./ResumeContent";
 
 export const metadata: Metadata = {
@@ -14,8 +14,8 @@ export const metadata: Metadata = {
 export default function ResumePage() {
   return (
     <>
-      <DocumentLang lang="zh-CN" />
       <ResumeContent />
+      <QuoteBanner text="Grow through what you go through." />
     </>
   );
 }

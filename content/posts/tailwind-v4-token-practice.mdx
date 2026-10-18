@@ -1,0 +1,38 @@
+---
+title: Tailwind v4 的 token 实践
+date: '2026-03-22'
+description: 从配置文件迁移到 CSS-first 之后，设计变量应该放在哪。
+tags: ['大前端']
+---
+
+# 迁移的阵痛
+
+Tailwind v3 的时代，主题色、字体、圆角都写在 `tailwind.config.js` 里；升到 v4 之后配置搬进了 CSS，第一反应是茫然——变量到底定义在哪里才算对。
+
+# 现在的做法
+
+## 用 @theme 定义设计变量
+
+把颜色、字体、间距统一放进 `@theme` 块，Tailwind 会自动生成对应的工具类，业务代码里不再出现硬编码的色值。
+
+```css
+@theme {
+  --color-surface: #faf8ff;
+  --color-accent: #4338ca;
+  --font-display: "Plus Jakarta Sans", sans-serif;
+}
+```
+
+## 用 CSS 变量承接主题切换
+
+亮暗两套主题不写两套工具类，只覆盖 CSS 变量本身，组件引用变量名，切换主题时自动跟随。
+
+| 层级 | 放什么 | 例子 |
+| --- | --- | --- |
+| @theme | 设计系统原语 | 色阶、字体、间距 |
+| :root | 当前主题的变量值 | 亮色背景、暗色背景 |
+| 组件 | 只引用变量名 | `bg-surface`、`text-accent` |
+
+# 一点教训
+
+不要把一个变量的值写在三个地方。token 的意义就在于改一处、全局生效，否则不如回到硬编码。

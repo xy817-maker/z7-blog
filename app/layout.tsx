@@ -1,25 +1,15 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import { AnalyticsProvider } from "@/components/analytics/AnalyticsProvider";
 import { umamiConfig } from "@/lib/analytics/config";
 import { integrationConfig } from "@/lib/integrations";
 import { Analytics } from "@vercel/analytics/next";
 import { ThemeProvider } from "@/components/common/ThemeProvider";
+import { ConstellationCanvas } from "@/components/home/ConstellationCanvas";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { getAllPosts } from "@/lib/mdx";
 import { siteConfig } from "@/lib/site-config";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: {
@@ -44,13 +34,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="zh-CN" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
+        className="antialiased min-h-screen flex flex-col"
       >
+        <div className="mesh-bg pointer-events-none fixed inset-0 -z-10 overflow-hidden" aria-hidden="true">
+          <div className="orb orb-violet animate-float-delayed absolute top-1/6 right-[5%] h-[46rem] w-[46rem] opacity-70" />
+          <div className="orb orb-cyan animate-float-slow absolute top-1/3 right-[18%] h-[32rem] w-[32rem] opacity-60" />
+        </div>
+        <ConstellationCanvas />
         <ThemeProvider>
           <Navbar />
-          <main className="flex-1 pt-16">{children}</main>
+          <main className="flex-1 pt-24">{children}</main>
           <Footer />
         </ThemeProvider>
         {integrationConfig.vercelAnalytics ? <Analytics /> : null}

@@ -1,14 +1,14 @@
-const xUrl = "https://example.com/social";
 export const siteConfig = {
-  name: "示例作者",
-  nameEn: "Demo Author",
-  avatar: "/avatar.svg",
-  title: "Homepage Starter",
-  description: "A configurable blog and personal homepage starter.",
-  url: "https://example.com",
-  github: "octocat",
-  email: "hello@example.com",
-  x: xUrl,
+  name: "z7",
+  nameEn: "z7",
+  avatar: "/avatar.jpg",
+  title: "z7 的博客",
+  description: "z7 的个人博客：记录构建、学习与写作。",
+  url: "https://xy817-maker.github.io",
+  github: "xy817-maker",
+  email: "528763895@qq.com",
+  footerBio:
+    "Build systems, learn deeply, and write it all down. Engineer software for exploration and real-world use.",
   nav: [
     { label: "Home", href: "/" },
     { label: "Blog", href: "/blog" },
@@ -18,16 +18,45 @@ export const siteConfig = {
   ],
   footer: {
     contactLinks: [
-      { label: "GitHub", href: "https://github.com/octocat", type: "github" as const },
-      { label: "hello@example.com", href: "mailto:hello@example.com", type: "email" as const },
+      { label: "GitHub", href: "https://github.com/xy817-maker", type: "github" as const },
+      { label: "528763895@qq.com", href: "mailto:528763895@qq.com", type: "email" as const },
+      { label: "Aweme", href: "#", type: "aweme" as const },
     ],
-    friendLinks: [{ label: "Example Site", href: "https://example.com" }],
+    friendLinks: [
+      { label: "EastonJiang-全栈神", href: "https://www.jiangxu.net/" },
+    ] as { label: string; href: string }[],
   },
   particles: { enabled: true, pages: ["/"], mobileParticleCount: 30, desktopParticleCount: 100 },
+  heroEyebrow: "Developer · Builder · Explorer",
+  heroRoles: ["Full-Stack Developer", "AI Tooling Explorer", "Open Source Enthusiast"],
   projects: [
-    { id: "starter", name: "Homepage Starter", description: "A demo project for a personal blog.", tags: ["Next.js", "TypeScript"], link: "https://example.com", github: "https://github.com/octocat", category: "ForStudy" as const },
-    { id: "demo-tool", name: "Demo Tool", description: "A fictional project showing the project card layout.", tags: ["React"], link: "https://example.com/tool", github: "https://github.com/octocat", category: "resume" as const },
-  ],
+    {
+      id: "task-cli",
+      name: "Task CLI",
+      description: "A command-line task tracker built with Go and Cobra, with local JSON storage.",
+      tags: ["Go", "CLI"],
+      link: "",
+      github: "https://github.com/xy817-maker",
+      category: "Developing" as const,
+    },
+    {
+      id: "hooks-lab",
+      name: "Hooks Lab",
+      description: "A practice repo for handwritten React hooks: useDebounce, useVirtualList and more.",
+      tags: ["React", "TypeScript"],
+      link: "",
+      github: "https://github.com/xy817-maker",
+      category: "ForStudy" as const,
+    },
+  ] as {
+    id: string;
+    name: string;
+    description: string;
+    tags: string[];
+    link: string;
+    github: string;
+    category: "resume" | "vibecoding" | "ForStudy" | "Developing";
+  }[],
   projectCategories: [
     { key: "resume", label: "Portfolio" },
     { key: "vibecoding", label: "Experiments" },
