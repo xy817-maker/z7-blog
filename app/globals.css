@@ -28,6 +28,7 @@
   --pill-text: #372abf;
   --pill-border: rgba(199, 196, 215, 0.45);
   --nav-bg: rgba(255, 255, 255, 0.28);
+  --menu-bg: rgba(255, 255, 255, 0.9);
   --shadow-glass: 0 20px 50px -12px rgba(67, 56, 202, 0.12), 0 4px 18px rgba(0, 0, 0, 0.03);
   --blog-thumb-w: 11rem;
   --blog-thumb-h: 7rem;
@@ -55,6 +56,7 @@
   --pill-text: #c3c0ff;
   --pill-border: rgba(165, 180, 252, 0.25);
   --nav-bg: rgba(40, 48, 68, 0.32);
+  --menu-bg: rgba(40, 48, 68, 0.92);
   --shadow-glass: 0 20px 50px -12px rgba(0, 0, 0, 0.45), 0 4px 18px rgba(0, 0, 0, 0.25);
 }
 
@@ -130,6 +132,13 @@ body {
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--card-border);
+}
+
+/* 移动端菜单：独立玻璃卡（导航保持透明，菜单自带更实的背板保证可读性） */
+.menu-glass {
+  background: var(--menu-bg);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
 }
 
 /* 浮动光晕（Ethereal Glass 氛围 bloom） */
